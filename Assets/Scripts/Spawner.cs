@@ -6,19 +6,38 @@ public class Spawner : MonoBehaviour
 {
     public GameObject prefab;
 
-    public float spawnRate = 1f;
+    //public float spawnRate = 1;
+    public float minSpawnRate = 0.5f; // Minimum time between spawns
+    public float maxSpawnRate = 2f;   // Maximum time between spawns
     public float minHeight = -1f;
     public float maxHeight = 1f;
 
+    private Coroutine spawnCoroutine;
+
     private void OnEnable()
     {
-        InvokeRepeating(nameof(Spawn), spawnRate, spawnRate);
+        spawnCoroutine = StartCoroutine(SpawnRandomly());
     }
     
     private void OnDisable()
     {
-        CancelInvoke(nameof(Spawn));
+        //CancelInvoke(nameof(Spawn));
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+        }
     }
+
+    private IEnumerator SpawnRandomly()
+    {
+        while (true)
+        {
+            Spawn();
+            float randomDelay = Random.Range(minSpawnRate, maxSpawnRate);
+            yield return new WaitForSeconds(randomDelay);
+        }
+    }
+
     //
     private void Spawn()
     {
