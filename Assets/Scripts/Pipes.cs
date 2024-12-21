@@ -10,6 +10,7 @@ public class Pipes : MonoBehaviour
 
     private void Start()
     {
+        //Get the left edge of any screen size
         leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1f ;
     }
 
