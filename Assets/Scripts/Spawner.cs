@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject prefab;
+    [SerializeField] private GameObject prefab;
 
-    //public float spawnRate = 1;
-    public float minSpawnRate = 0.5f; // Minimum time between spawns
-    public float maxSpawnRate = 2f;   // Maximum time between spawns
-    public float minHeight = -1f;
-    public float maxHeight = 1f;
+    [SerializeField] private float minSpawnRate = 0.5f; // Minimum time between spawns
+    [SerializeField] private float maxSpawnRate = 2f;   // Maximum time between spawns
+    [SerializeField] private float minHeight = -1f;
+    [SerializeField] private float maxHeight = 1f;
 
     private Coroutine spawnCoroutine;
 
@@ -21,7 +20,6 @@ public class Spawner : MonoBehaviour
     
     private void OnDisable()
     {
-        //CancelInvoke(nameof(Spawn));
         if (spawnCoroutine != null)
         {
             StopCoroutine(spawnCoroutine);

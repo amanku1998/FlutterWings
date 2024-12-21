@@ -5,7 +5,6 @@ using UnityEngine;
 public class Parallax : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
-
     [SerializeField] private float animationSpeed = 1f;
 
     private void Awake()
